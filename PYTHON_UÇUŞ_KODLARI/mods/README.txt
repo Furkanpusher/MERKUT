@@ -12,3 +12,12 @@ bu modlar kumandadan rasberry pi ye verilecektir. rasberry pi ile de pixhawka ko
 
 
 Not: Bu bir taslak, değişiklikler yapılacak.
+
+
+Çalıştırma Talimatları:
+
+Çalıştırmak için PYTHON_UCUS_KODLARI klasörünün içindeyken,
+
+python3 (veya python) -m mods.run.run
+
+komutu çalıştırılmalı.
