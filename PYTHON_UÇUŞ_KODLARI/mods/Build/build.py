@@ -19,7 +19,7 @@ async def connect(drone):
     async for state in drone.core.connection_state():
         if state.is_connected:
             print("Bağlandı!")
-            break
+            return True
 
 async def arm(drone):
     try:
