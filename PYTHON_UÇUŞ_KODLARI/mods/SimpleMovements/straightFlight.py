@@ -1,4 +1,5 @@
 import datetime
+import time as t
 from mavsdk.offboard import Attitude
 
 
@@ -17,8 +18,9 @@ async def straightFlight(drone,
             orig_altitude = abs(position.relative_altitude_m)
             break
         
-        current_time = datetime.now()
-        while (current_time-datetime.now()).total_seconds() < time:            
+        current_time = datetime.datetime.now()
+        t.sleep(0.1)
+        while (datetime.datetime.now() - current_time).total_seconds() < time:   
             async for position in drone.telemetry.position():
                 altitude = abs(position.relative_altitude_m)
                 break

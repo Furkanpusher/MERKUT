@@ -1,6 +1,6 @@
 import asyncio
 import sys
-from mods.Build import build, setup, arm, connect, startOffBoardMode
+from mods.Build import setup, arm, connect, startOffBoardMode
 from mavsdk.offboard import Attitude
 test_sayisi = 4
 success = 0
@@ -84,5 +84,3 @@ async def checkFailure():
     if failure:
         await printResult()
         sys.exit()
-
-asyncio.run(build_test())

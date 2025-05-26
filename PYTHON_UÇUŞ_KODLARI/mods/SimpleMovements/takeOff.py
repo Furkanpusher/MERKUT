@@ -27,16 +27,20 @@ async def takeoff(drone,
 
             print(f"Anlık İrtifa: {altitude:.1f}m  Anlık pitch: {pitch:.1f}  Anlık yaw: {yaw:.1f}  Anlık roll: {roll:.1f}")
 
+            thrust = 1.0
+
             if altitude <= target_altitude - delta:
                 target_pitch = 15.0
             elif altitude <= target_altitude:
                 target_pitch = 1.0
             else:
                 print(f"Hedef irtifaya({target_altitude}) ulasildi.")
+                target_pitch = 0
+                thrust = 0.5
                 break
 
             await drone.offboard.set_attitude(
-                Attitude(0, target_pitch, 0.0, 1.0)  # Roll, Pitch, Yaw, Throttle
+                Attitude(0, target_pitch, 0.0, thrust)  # Roll, Pitch, Yaw, Throttle
             )
             await asyncio.sleep(0.1)  # 10 Hz (PX4 en az 2 Hz istiyor)
     except KeyboardInterrupt:
