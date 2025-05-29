@@ -19,8 +19,12 @@ async def straightFlight(drone,
             break
         
         current_time = datetime.datetime.now()
+        print("DEBUG1")
         t.sleep(0.1)
-        while (datetime.datetime.now() - current_time).total_seconds() < time:   
+        print("DEBUG2")
+
+        while (datetime.datetime.now() - current_time).total_seconds() < time:  
+            print("DEBUG3")
             async for position in drone.telemetry.position():
                 altitude = abs(position.relative_altitude_m)
                 break

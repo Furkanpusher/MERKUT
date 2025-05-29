@@ -47,6 +47,5 @@ async def straightFlight_test(drone,
 
     if failure:
         print(f"straigthFlight_test basarisiz. (Irtifa farki: {altitude_diff:.2f})\n(Yon farklari -> pitch: {pitch_diff:.2f} yaw: {yaw_diff:.2f} roll: {roll_diff:.2f})\n")
-        sys.exit()
 
     print(f"STRAIGHT FLIGHT TEST SONLANDI. {success}/{test_sayisi}\n")
