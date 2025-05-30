@@ -1,4 +1,3 @@
-import sys
 from mods.SimpleMovements import straightFlight
 
 test_sayisi = 1
@@ -6,6 +5,7 @@ success = 0
 failure = False
 
 async def straightFlight_test(drone,
+                              thrust,
                               altitude_delta: int = 5,
                               other_delta: int = 1):
 
@@ -22,7 +22,7 @@ async def straightFlight_test(drone,
         roll = att.roll_deg
         break
 
-    await straightFlight(drone, 5)
+    await straightFlight(drone, 5, thrust)
 
     async for position in drone.telemetry.position():
         new_altitude = abs(position.relative_altitude_m)
