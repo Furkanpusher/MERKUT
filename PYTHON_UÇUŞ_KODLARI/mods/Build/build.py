@@ -18,8 +18,8 @@ async def setup():
 
 async def connect(drone):
     print("baglanacak")
-    await drone.connect(system_address="serial:///dev/ttyACM2:57600")
-    #await drone.connect(system_address="udp://:14540")
+    #await drone.connect(system_address="serial:///dev/ttyACM2:57600")       # Raspberry
+    await drone.connect(system_address="udp://:14540")                     # Gazebo
     print("Bağlantı bekleniyor...")
     async for state in drone.core.connection_state():
         if state.is_connected:
