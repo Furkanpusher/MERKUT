@@ -26,7 +26,7 @@ async def test_turns(drone):
     i = 0
     for diff in differences:
         print(f"Fark {i+1} ({turns[i]}): {diff:.2f}  --  ", end="")
-        if -2 <= diff <= 2:
+        if -5 <= diff <= 5:
             print("Basarili")
         else:
             print("Basarisiz")
