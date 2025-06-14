@@ -18,6 +18,23 @@ Not: Bu bir taslak, değişiklikler yapılacak.
 
 Çalıştırmak için PYTHON_UCUS_KODLARI klasörünün içindeyken,
 
+1- Run
+
 python3 (veya python) -m mods.run.run
 
-komutu çalıştırılmalı.
+Not: İçi istenildiği gibi düzenlenebilir, herhangi bir uçuş programı oluşturulabilir.
+
+2- Test
+
+python3 (veya python) -m mods.Tests.main_test
+
+Not: Bütün testleri çalıştırır (Build, takeoff, straightFlight, turnXDegree) Uçak yerdeyken çalıştırılmalı
+ve testlerin sırası değiştirilmemeli. Testlerin argümanları değiştirilebilir.
+
+
+ÖNEMLİ NOT: Build/build.py içerisindeki connect fonksiyonunda,
+
+await drone.connect(system_address="serial:///dev/ttyACM2:57600")       # Raspberry
+await drone.connect(system_address="udp://:14540")                     # Gazebo
+
+bu iki satırdan biri seçilmeli ve diğeri yorum satırı içine alınmalıdır.

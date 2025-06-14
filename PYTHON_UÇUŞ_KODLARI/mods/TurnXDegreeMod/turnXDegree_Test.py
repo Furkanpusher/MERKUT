@@ -2,29 +2,18 @@ from mavsdk import System
 from mavsdk.offboard import Attitude
 import asyncio
 
-from mods.TurnXDegreeMod import turnXDegree_Func
+from mods.TurnXDegreeMod import turn_fixed_wing
 
-success = 0
-fail = False
-
-async def turnXDegree_Test(drone,
-                           thrust,
-                     delta: int = 5):
-    
-    print("TURNXDEGREE TEST BASLADI\n")
-
-    global success, fail
-
+async def test_turns(drone):
     turns = [90, 90, 180, 180, 325, 35, 772, -52, 0, 1, -1]
     differences = []
-    test_sayisi = len(turns)
 
     for turn in turns:
         async for att in drone.telemetry.attitude_euler():
             orig_pitch = att.pitch_deg
             break
         
-        await turnXDegree_Func.turn_fixed_wing(drone, turn, thrust)
+        await turn_fixed_wing(drone, turn)
 
         async for att in drone.telemetry.attitude_euler():
             new_pitch = att.pitch_deg
@@ -34,13 +23,11 @@ async def turnXDegree_Test(drone,
 
         await asyncio.sleep(2)
 
-    i = 1
+    i = 0
     for diff in differences:
-        if diff < delta:
-            success += 1
-            print(f"{i}. Turn Basarili")
+        print(f"Fark {i+1} ({turns[i]}): {diff:.2f}  --  ", end="")
+        if -5 <= diff <= 5:
+            print("Basarili")
         else:
-            print(f"{i}. Turn Basarisiz! - Fark ({turns[i]}): {diff}")
-            fail = True
-        i = i+1
-    print(f"\nTURNXDEGREE TEST SONLANDI. {success}/{test_sayisi}\n")
+            print("Basarisiz")
+        i += 1
