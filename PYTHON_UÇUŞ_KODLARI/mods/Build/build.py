@@ -8,8 +8,8 @@ import asyncio
 async def build():
     drone = await setup()
     await connect(drone)
-    #await arm(drone)
-    #await startOffBoardMode(drone)
+    await arm(drone)
+    await startOffBoardMode(drone)
     return drone
 
 async def setup():
@@ -17,9 +17,8 @@ async def setup():
     return drone
 
 async def connect(drone):
-    print("baglanacak")
-    await drone.connect(system_address="serial:///dev/ttyACM1:57600")       # Raspberry
-    #await drone.connect(system_address="udp://:14540")                     # Gazebo
+    await drone.connect(system_address="udp://:14540")
+
     print("Bağlantı bekleniyor...")
     async for state in drone.core.connection_state():
         if state.is_connected:
@@ -28,7 +27,7 @@ async def connect(drone):
 
 async def arm(drone):
     try:
-        #await wait_until_ready(drone)
+        await wait_until_ready(drone)
         print("ARM ediliyor...")
         await drone.action.arm()
         await asyncio.sleep(1)
