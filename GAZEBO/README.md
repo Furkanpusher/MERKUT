@@ -11,9 +11,6 @@ Bu proje, Raspberry Pi üzerinde sistem açılışında otomatik olarak kamera k
 
 ## Otomatik Başlatma Ayarı
 
-- **Dosyayı açın**: sudo nano /etc/rc.local
-- **Dosyayı ekleyin**:<pre> ```
-# Python scriptlerini sistem açılışında çalıştır
-cd /home/pi/raspberry-pi-kamera-kayit && /usr/bin/python3 /home/pi/raspberry-pi-kamera-kayit/kamera_kaydedici.py >> /home/pi/logg.txt 2>&1 &
-``` </pre>
-- **Dosyayı çalıştırır hale getirin**: ``` sudo chmod +x /etc/rc.local ``` 
+- **Dosyayı açın**: <pre> sudo nano /etc/rc.local
+- **Dosyayı ekleyin**:<pre> cd /home/pi/raspberry-pi-kamera-kayit && /usr/bin/python3 /home/pi/raspberry-pi-kamera-kayit/kamera_kaydedici.py >> /home/pi/logg.txt 2>&1 &
+- **Dosyayı çalıştırır hale getirin**: <pre> sudo chmod +x /etc/rc.local
