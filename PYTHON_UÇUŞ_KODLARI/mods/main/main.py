@@ -3,6 +3,10 @@ import threading
 import queue
 import time
 from mavsdk import System
+from mavsdk.offboard import Attitude
+from mods.main import takeoff
+
+offboard_started = False
 
 # ----------------------------------------
 # Thread definitions
@@ -46,12 +50,14 @@ class ModeThread(threading.Thread):
                 data = self.input_queue.get(timeout=0.1)
             except queue.Empty:
                 continue
-            controls = {
-                'yaw': data['yaw'],
-                'pitch': data['pitch'],
-                'roll': data['roll'],
-                'thrust': data['thrust']
-            }
+
+            #controls = {
+            #    'yaw': data['yaw'],
+            #    'pitch': data['pitch'],
+            #    'roll': data['roll'],
+            #    'thrust': data['thrust']
+            #}
+            controls = takeoff(data)
             self.output_queue.put(controls)
 
     def is_active(self):
@@ -85,20 +91,32 @@ async def get_telemetry(drone: System, stop_event: threading.Event) -> dict:
         break
     if stop_event.is_set():
         return {}
-    async for odo in drone.telemetry.odometry():
-        thrust = odo.velocity_body.z
+    async for vel in drone.telemetry.position_velocity_ned():
+        thrust = vel.velocity.down_m_s
         break
-    return {'yaw': yaw, 'pitch': pitch, 'roll': roll, 'thrust': thrust}
+    if stop_event.is_set():
+        return {}
+    async for pos in drone.telemetry.position():
+        altitude = pos.absolute_altitude_m
+        break
+    return {'yaw': yaw, 'pitch': pitch, 'roll': roll, 'thrust': thrust, 'altitude': altitude}
 
 async def apply_controls(drone: System, controls: dict, stop_event: threading.Event):
+    global offboard_started
     if stop_event.is_set():
         return
-    await drone.offboard.start()
     await drone.offboard.set_attitude(
-        controls['roll'], controls['pitch'], controls['yaw'], controls['thrust']
+        Attitude(controls['roll'], controls['pitch'], controls['yaw'], controls['thrust'])
     )
+    if not offboard_started:
+        try:
+            await drone.offboard.start()
+            offboard_started = True
+            print("Offboard modu başlatıldı.")
+        except Exception as e:
+            print(f"Offboard başlatılamadı: {e}")
+            return
     await asyncio.sleep(0.1)
-    await drone.offboard.stop()
 
 # ----------------------------------------
 # Main drone loop (runs in separate thread)
@@ -165,6 +183,7 @@ def drone_loop(stop_event: threading.Event):
     # MAVSDK bağlantısını sonlandırmak için loop kapatılabilir
     loop.stop()
     loop.close()
+    drone.offboard.stop()
 
 # ----------------------------------------
 # Program kontrol (enter ile başlat/durdur)
