@@ -8,8 +8,8 @@ def takeoff(data,
             print(f"Anlik irtifa({altitude}), hedef irtifadan({target_altitude}) buyuk!")
             exit()
 
-        print(f"Anlık İrtifa: {altitude:.1f}m  Anlık pitch: {pitch:.1f}  Anlık yaw: {yaw:.1f}  Anlık roll: {roll:.1f}")
-
+        #print(f"Anlık İrtifa: {altitude:.1f}m  Anlık pitch: {pitch:.1f}  Anlık yaw: {yaw:.1f}  Anlık roll: {roll:.1f}")
+        thrust = 0.8
         if altitude <= target_altitude - delta:
             target_pitch = 4.0
         elif altitude <= target_altitude:

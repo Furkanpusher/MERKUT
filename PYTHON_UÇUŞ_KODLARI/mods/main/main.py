@@ -57,6 +57,7 @@ class ModeThread(threading.Thread):
             #    'roll': data['roll'],
             #    'thrust': data['thrust']
             #}
+            print(f"\nData:  {data}\n")
             controls = takeoff(data)
             self.output_queue.put(controls)
 
@@ -67,7 +68,7 @@ class ModeThread(threading.Thread):
 # ----------------------------------------
 # Async helper functions
 # ----------------------------------------
-async def connect_drone(drone: System, stop_event: threading.Event, address: str = "udp://:14540"):
+async def connect_drone(drone, stop_event: threading.Event, address: str = "udp://:14540"):
     while not stop_event.is_set():
         try:
             await drone.connect(system_address=address)
@@ -101,15 +102,31 @@ async def get_telemetry(drone: System, stop_event: threading.Event) -> dict:
         break
     return {'yaw': yaw, 'pitch': pitch, 'roll': roll, 'thrust': thrust, 'altitude': altitude}
 
-async def apply_controls(drone: System, controls: dict, stop_event: threading.Event):
+async def apply_controls(drone, controls: dict, stop_event: threading.Event):
     global offboard_started
     if stop_event.is_set():
         return
-    await drone.offboard.set_attitude(
-        Attitude(controls['roll'], controls['pitch'], controls['yaw'], controls['thrust'])
-    )
+    print("------------------------------------------------------")
+    print("------------------------------------------------------")
+    print("------------------------------------------------------")
+    print("ATTITUDE DEGISTIRILIYOR SUANDA")
+    print(f"{controls['thrust']}")
+    print("------------------------------------------------------")
+    print("------------------------------------------------------")
+    print("------------------------------------------------------")
+
+    #await drone.offboard.set_attitude(
+    #    Attitude(controls['roll'], controls['pitch'], controls['yaw'], controls['thrust'])
+    #)
+    
+    attitude = Attitude(0, 0, 0, 1.0)
+    for _ in range(5):
+        await drone.offboard.set_attitude(attitude)
+        await asyncio.sleep(0.1)  # 20Hz
+
     if not offboard_started:
         try:
+            await drone.action.arm()
             await drone.offboard.start()
             offboard_started = True
             print("Offboard modu başlatıldı.")
@@ -169,6 +186,7 @@ def drone_loop(stop_event: threading.Event):
         # 11-12: Modu uygula
         try:
             controls = mode_thread.output_queue.get(timeout=1)
+            print(controls)
             loop.run_until_complete(apply_controls(drone, controls, stop_event))
         except queue.Empty:
             continue
