@@ -3,10 +3,12 @@ def takeoff(data,
             target_altitude: int = 20,
             delta: int = 5):
     try:
+        done = False
         yaw, pitch, roll, thrust, altitude = data['yaw'], data['pitch'], data['roll'], data['thrust'], data['altitude']
         if target_altitude < altitude:
             print(f"Anlik irtifa({altitude}), hedef irtifadan({target_altitude}) buyuk!")
-            exit()
+            done = True
+            return {'yaw': yaw, 'pitch': pitch, 'roll': roll, 'thrust': thrust, 'altitude': altitude, 'control_result': done}
 
         #print(f"Anlık İrtifa: {altitude:.1f}m  Anlık pitch: {pitch:.1f}  Anlık yaw: {yaw:.1f}  Anlık roll: {roll:.1f}")
         thrust = 0.8
@@ -18,8 +20,9 @@ def takeoff(data,
             print(f"Hedef irtifaya({target_altitude}) ulasildi.")
             target_pitch = 0
             thrust = 0.5
+            done = True
 
-        return {'yaw': yaw, 'pitch': target_pitch, 'roll': roll, 'thrust': thrust, 'altitude': altitude}
+        return {'yaw': yaw, 'pitch': target_pitch, 'roll': roll, 'thrust': thrust, 'altitude': altitude, 'control_result': done}
     except KeyboardInterrupt:
         print("Kullanıcı tarafından durduruldu.")
     except Exception as e:
