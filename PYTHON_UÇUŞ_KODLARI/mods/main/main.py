@@ -6,6 +6,7 @@ from mavsdk import System
 from mavsdk.offboard import Attitude
 from mods.main import takeoff
 from mods.main.straightFlight_main import ModeStraightFlight
+from mods.main.turnXDegree_Func_main import ModeTurnXDegree
 
 offboard_started = False
 
@@ -29,8 +30,7 @@ class SecurityThread(threading.Thread):
                 continue
             safe = True
             yaw, pitch, roll, thrust, altitude = data.get('yaw'), data.get('pitch'), data.get('roll'), data.get('thrust'), data.get('altitude')
-            if data.get('thrust', 0) < 0.2 or data:
-                safe = False
+            
             self.output_queue.put({'safe': safe})
 
     def is_active(self):
@@ -104,8 +104,8 @@ class ModeThread(threading.Thread):
     def start_mode_turn_x_degree(self):
         print(">> C Modu Başlatılıyor")
         self.current_mode = "C"
-        # self.mode_c_thread = ModeC()
-        # self.mode_c_thread.start()
+        self.mode_c_thread = ModeTurnXDegree()
+        self.mode_c_thread.start()
 
     def stop(self):
         self._stop_event.set()
