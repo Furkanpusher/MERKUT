@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1900</width>
+    <height>1019</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>10</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+color: rgb(255, 255, 255);
+background: rgb(48, 49, 51);
+border:  0px;
+}
+
+#combatButton, #safeFlyButton, #landButton,
+#kamikazeButton, #stopButton,
+#escapeButton, #takeOffButton {border-radius: 10px; height:70px}
+#frame_2, #frame_3, #gridFrame, #connect, #disconnect, #verticalFrame_12 {border-radius: 10px;}
+
+#frame_3{margin-bottom:20px;}
+
+#connect, #disconnect{padding: 10px;}
+
+#gridFrame, #verticalFrame_12, #label_2{	background: rgb(55, 59, 60)}
+
+
+
+#label_4, #label, #username, #password, #label_3, #label_15, #label_11, #label_5, #label_17, #label_13, #label_23, #label_21, #label_19, #label_22, #speed, #battery, #roll, #height, #latitude, #pitch, #flightTime, #longitude, #yaw, #durum{
+	background: rgb(48, 49, 51);
+	margin-left:5px;
+	margin-right:5px;}
+
+#label_4, #label, #label_3, #label_15, #label_11, #label_5, #label_17, #label_13, #label_23, #label_21, #label_19, #label_22 {
+	border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+	margin-top:10px;}
+
+#username, #password, #speed, #battery, #roll, #height, #latitude, #pitch, #flightTime, #longitude, #yaw, #durum{
+	border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+	margin-bottom: 10px}
+
+QTabBar::tab:first {margin-left:10px}
+
+QTabBar::tab {
+	background: rgb(55, 59, 60);
+    color: white;
+    padding: 5px;
+    border: 1px solid rgb(48, 49, 51);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">padding-left:10px;</string>
+   </property>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1921</width>
+      <height>1041</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Giriş</string>
+     </attribute>
+     <widget class="QFrame" name="gridFrame">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>630</y>
+        <width>1251</width>
+        <height>302</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QFrame" name="frame_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>300</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background: rgb(85, 85, 0);</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="label_6">
+          <property name="geometry">
+           <rect>
+            <x>-250</x>
+            <y>-280</y>
+            <width>1281</width>
+            <height>641</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>../harita.jpg</pixmap>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="3" column="0" colspan="2">
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_23">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Uçuş Süresi</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="flightTime">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="2">
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_19">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Yaw</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="yaw">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="4" colspan="2">
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Hız</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="speed">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Yükseklik</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="height">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="2" colspan="2">
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_17">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Enlem</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="latitude">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="2" colspan="2">
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_21">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Boylam</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="longitude">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="1">
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Roll</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="roll">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="4" colspan="2">
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_15">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Pil</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="battery">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="3" colspan="3">
+            <layout class="QVBoxLayout" name="verticalLayout_16">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_22">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Otomatik/Manuel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="durum">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_13">
+               <property name="styleSheet">
+                <string notr="true">font-size: 13px;</string>
+               </property>
+               <property name="text">
+                <string>Pitch</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="pitch">
+               <property name="styleSheet">
+                <string notr="true">font-size: 20px;</string>
+               </property>
+               <property name="text">
+                <string>Yok</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QFrame" name="verticalFrame_12">
+      <property name="geometry">
+       <rect>
+        <x>1270</x>
+        <y>630</y>
+        <width>631</width>
+        <height>301</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_14">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-size: 20px;</string>
+         </property>
+         <property name="text">
+          <string>Sunucu Girişi</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_15">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="styleSheet">
+            <string notr="true">font-size: 13px;</string>
+           </property>
+           <property name="text">
+            <string>Kullanıcı Adı</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="username">
+           <property name="styleSheet">
+            <string notr="true">font-size: 30px;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="styleSheet">
+            <string notr="true">font-size: 13px;</string>
+           </property>
+           <property name="text">
+            <string>Şifre</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="password">
+           <property name="styleSheet">
+            <string notr="true">font-size: 30px;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="connect">
+           <property name="styleSheet">
+            <string notr="true">font-size: 20px;</string>
+           </property>
+           <property name="text">
+            <string>Bağlanmak</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="disconnect">
+           <property name="styleSheet">
+            <string notr="true">font-size: 20px;</string>
+           </property>
+           <property name="text">
+            <string>Bağlantıyı Kesmek</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QFrame" name="frame_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-2</y>
+        <width>1251</width>
+        <height>621</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
+        <horstretch>255</horstretch>
+        <verstretch>200</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">min-width: 70%;
+min-height: 100%;
+background: rgb(255,255,0);</string>
+      </property>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>-330</x>
+         <y>-450</y>
+         <width>1701</width>
+         <height>1211</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>resim/ucak2.png</pixmap>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>1250</x>
+        <y>-10</y>
+        <width>641</width>
+        <height>631</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>611</width>
+         <height>621</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="safeFlyButton">
+          <property name="styleSheet">
+           <string notr="true">background: rgb(0, 158, 0);
+font-size: 50px;
+color: rgb(255, 255, 255)</string>
+          </property>
+          <property name="text">
+           <string>Güvenli uçuş</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="combatButton">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>100</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: rgb(167, 0, 0);
+font-size: 50px;
+color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>İt Dalaşı</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="kamikazeButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>100</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>111111</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: rgb(167, 0, 0);
+font-size: 50px;
+color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Kamikaze</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="escapeButton">
+          <property name="styleSheet">
+           <string notr="true">background: rgb(167, 0, 0);
+font-size: 50px;
+color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Kaçış</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="takeOffButton">
+          <property name="styleSheet">
+           <string notr="true">background: rgb(167, 0, 0);
+font-size: 50px;
+color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Kalkış</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="landButton">
+          <property name="styleSheet">
+           <string notr="true">background: rgb(167, 0, 0);
+font-size: 50px;
+color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>İniş</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="stopButton">
+          <property name="styleSheet">
+           <string notr="true">background: rgb(167, 0, 0);
+font-size: 50px;
+color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Dur</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Konsol</string>
+     </attribute>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1900</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
