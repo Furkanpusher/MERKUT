@@ -1,6 +1,5 @@
 from mavsdk import System
 from mavsdk.offboard import Attitude
-import asyncio
 import threading
 
 import threading
@@ -76,11 +75,11 @@ class ModeTurnXDegree(threading.Thread):
                     
                 alt_diff = abs(orig_altitude - altitude)
                 if orig_altitude < altitude - self.altitude_tolerance:
-                    processed = {'yaw': self.bank_angle_deg, 'pitch': self.low_pitch*(alt_diff%2), 'roll': 0.0, 'thrust': self.drop_throttle}
+                    processed = {'roll': self.bank_angle_deg, 'pitch': self.low_pitch*(alt_diff%2), 'yaw': 0.0, 'thrust': self.drop_throttle}
                 elif orig_altitude > altitude + self.altitude_tolerance:
-                    processed = {'yaw': self.bank_angle_deg, 'pitch': self.high_pitch*(alt_diff%2), 'roll': 0.0, 'thrust': self.normal_throttle}
+                    processed = {'roll': self.bank_angle_deg, 'pitch': self.high_pitch*(alt_diff%2), 'yaw': 0.0, 'thrust': self.normal_throttle}
                 else:
-                    processed = {'yaw': self.bank_angle_deg, 'pitch': self.default_pitch, 'roll': 0.0, 'thrust': self.normal_throttle}
+                    processed = {'roll': self.bank_angle_deg, 'pitch': self.default_pitch, 'yaw': 0.0, 'thrust': self.normal_throttle}
 
                 current_yaw = data.get('yaw')
 
@@ -93,16 +92,27 @@ class ModeTurnXDegree(threading.Thread):
                     print("[Manevra] Hedef heading’e ulaşıldı.")
                     break
 
-                # Orijinal pitch ve throttle ile uçuşa devam
-                print("[Manevra] Orijinal pitch ve throttle değerleri korunarak harekete devam ediliyor.")
-                processed = {'yaw': 0.0, 'pitch': orig_pitch, 'roll': 0.0, 'thrust': self.normal_throttle}
-
                 # Sonucu kaydet
                 with self._result_lock:
                     self._result = processed
 
             # CPU yükünü azaltmak için kısa uyku
             time.sleep(0.05)
+
+        start_time = time.time()
+
+        while self.running.is_set():
+            
+            if start_time + 2 <= time.time():
+                break
+
+            # Orijinal pitch ve throttle ile uçuşa devam
+            print("[Manevra] Orijinal pitch ve throttle değerleri korunarak harekete devam ediliyor.")
+            processed = {'roll': 0.0, 'pitch': orig_pitch, 'yaw': 0.0, 'thrust': self.normal_throttle}
+
+            # Sonucu kaydet
+            with self._result_lock:
+                self._result = processed
 
         print("[C Modu] Durduruldu.")
 

@@ -288,6 +288,7 @@ if __name__ == "__main__":
                 worker_thread.join(timeout=5)
                 worker_thread = None
                 program_event.clear()
+                offboard_started = False
                 print("Program durduruldu.")
             else:
                 # Başlat
